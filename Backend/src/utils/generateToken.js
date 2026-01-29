@@ -12,7 +12,7 @@ export const generateToken = (user, res) => {
   };
   const token = jwt.sign(token_payload, process.env.JWT_SECRET, {
     algorithm: "HS256",
-    expiresIn: process.env.TOKEN_EXPIRY || "7d",
+    expiresIn: `${process.env.TOKEN_EXPIRY}${process.env.TOKEN_EXPIRY_UNIT}` || "7d",
   });
   res.cookie("token", token, {
     httpOnly: true,
