@@ -1,9 +1,9 @@
 import express from 'express';
+import messageController from "../controllers/message.controller.js"
 
 const router = express.Router();
+const controller = messageController();
 
-router.post('/send', (req, res) => {
-    res.status(200).json({ message: 'Send message route' });
-});
+router.post('/send', controller.sendMessage);
 
 export default router;
