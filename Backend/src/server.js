@@ -1,11 +1,10 @@
 import express from 'express';
-import dotenv from 'dotenv';
+import dotenv from 'dotenv/config';
 import appRouter from './route.js';
 import path from 'path';
 import { connectDB } from "./startup/db.js";
 import cors from 'cors';
 
-dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 const __dirname = path.resolve();
