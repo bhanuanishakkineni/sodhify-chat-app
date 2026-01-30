@@ -81,7 +81,7 @@ const msgController = () => {
         image: imageUrl,
       });
       await newMessage.save();
-      res.status(201).json({ msg: "Message created and sent successfully" });
+      res.status(201).json({ msg: "Message created and sent successfully", data: {message: newMessage}});
     } catch (err) {
       console.log("Error in sendMessage controller", err);
       res.status(500).json({ msg: "Error sending message" });
