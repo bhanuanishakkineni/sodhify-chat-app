@@ -15,7 +15,7 @@ const __dirname = path.resolve();
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
-app.use(arcjetMiddleware);
+// app.use(arcjetMiddleware);
 
 appRouter(app);
 

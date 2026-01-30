@@ -4,7 +4,7 @@ import profileRouter from './routes/profile.route.js';
 
 const appRouter = (app) => {
     app.use('/api/auth', authRouter);
-    app.use('/api/message', messageRouter);
+    app.use('/api/messages', messageRouter);
     app.use('/api/profile', profileRouter);
 };
 
