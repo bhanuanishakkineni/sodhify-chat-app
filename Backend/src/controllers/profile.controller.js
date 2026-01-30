@@ -13,8 +13,8 @@ const profileController = () => {
       const updatedUser = await User.findByIdAndUpdate(
         userId,
         { profilePic: uploadResponse.secure_url },
-        { new: true },
-      );
+        { new: true, runValidators: true },
+      ).select("-password");
       res.status(200).json({
         msg: "Profile picture saved successfully",
         data: {
@@ -23,7 +23,7 @@ const profileController = () => {
         },
       });
     } catch (err) {
-      res.status(500).json({ msg: "Internal Server error", err});
+      res.status(500).json({ msg: "Internal Server error", err });
     }
   };
   return { updateProfile };
