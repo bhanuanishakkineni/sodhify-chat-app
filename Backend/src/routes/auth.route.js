@@ -1,5 +1,6 @@
 import express from 'express';
 import authController from '../controllers/auth.controller.js';
+import { authMiddleware } from '../middlewares/auth.middleware.js';
 
 const router = express.Router();
 const controller = authController();
@@ -8,9 +9,9 @@ const controller = authController();
 router.post('/signup', controller.signup);
 router.post('/login', controller.login);
 router.post('/logout', controller.logout);
-router.get('/loginCheck', async (req, res) => {
-    res.status(200).json(req.user);
-})
+router.get('/loginCheck', authMiddleware ,async (req, res) => {
+    res.status(200).json({data: req.user});
+});
 
 // Test endpoint for rate limiting
 router.get('/test', async (req, res) => {
