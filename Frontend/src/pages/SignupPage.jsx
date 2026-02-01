@@ -11,15 +11,15 @@ import {
 import { Link } from "react-router-dom";
 
 function SignupPage() {
-  const [formData, setFormData] = useState({
+  const [signUpFormData, setSignUpFormData] = useState({
     fullName: "",
     email: "",
     password: "",
   });
-  const { signUp, isSigningUp } = useAuthStore();
+  const { signup, isSigningUp } = useAuthStore();
   const handleSubmit = (e) => {
     e.preventDefault();
-    signUp(formData);
+    signup(signUpFormData);
   };
 
   return (
@@ -45,9 +45,9 @@ function SignupPage() {
                       <UserIcon className="auth-input-icon" />
                       <input
                         type="text"
-                        value={formData.fullName}
+                        value={signUpFormData.fullName}
                         onChange={(e) =>
-                          setFormData({ ...formData, fullName: e.target.value })
+                          setSignUpFormData({ ...signUpFormData, fullName: e.target.value })
                         }
                         className="input"
                         placeholder="John Doe"
@@ -60,9 +60,9 @@ function SignupPage() {
                       <MailIcon className="auth-input-icon" />
                       <input
                         type="email"
-                        value={formData.email}
+                        value={signUpFormData.email}
                         onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
+                          setSignUpFormData({ ...signUpFormData, email: e.target.value })
                         }
                         className="input"
                         placeholder="johndoe@xyz.com"
@@ -75,9 +75,9 @@ function SignupPage() {
                       <LockIcon className="auth-input-icon" />
                       <input
                         type="password"
-                        value={formData.password}
+                        value={signUpFormData.password}
                         onChange={(e) =>
-                          setFormData({ ...formData, password: e.target.value })
+                          setSignUpFormData({ ...signUpFormData, password: e.target.value })
                         }
                         className="input"
                         placeholder="Enter your password"
@@ -114,7 +114,7 @@ function SignupPage() {
                 />
                 <div className="mt-6 text-center">
                   <h3 className="text-xl font-medium text-cyan-400">
-                    Start Your Journey Today
+                    Start Your chit-chat Today...
                   </h3>
 
                   <div className="mt-4 flex justify-center gap-4">
