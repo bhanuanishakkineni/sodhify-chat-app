@@ -10,6 +10,6 @@ router.use(authMiddleware); // Auth middleware on all message routes
 router.get("/contacts", controller.getAllContacts);
 router.get("/chats", controller.getChatPartners);
 router.get('/chat/:id', controller.getMessagesByUserId);
-router.post('/send', controller.sendMessage);
+router.post('/send/:receiverId', controller.sendMessage);
 
 export default router;

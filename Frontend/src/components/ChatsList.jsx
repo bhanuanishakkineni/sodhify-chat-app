@@ -30,8 +30,8 @@ export function ChatsList() {
               </div>
             </div>
             <h4 className="text-slate-200 font-medium truncate">
-            {chatPartner.fullName}
-          </h4>
+              {chatPartner.fullName}
+            </h4>
           </div>
         </div>
       ))}

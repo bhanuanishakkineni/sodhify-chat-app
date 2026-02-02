@@ -61,5 +61,5 @@ export const useAuthStore = create((set) => ({
             console.log("Unable to update profile. Try again", err);
             toast.error(err.response.data.message);
         }
-    }
+    },
 }));

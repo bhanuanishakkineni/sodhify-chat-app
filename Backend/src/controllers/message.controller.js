@@ -67,9 +67,12 @@ const msgController = () => {
   const sendMessage = async (req, res) => {
     try {
       const { text, image } = req.body;
-      const receiverId = req.query.receiverId;
+      const { receiverId } = req.params;
       const senderId = req.user._id;
+
       let imageUrl = "";
+      const receiverExists = await User.findById(receiverId);
+      if (!receiverExists) return res.status(404).json({ msg: "Receiver not found" });
       if (image) {
         const uploadResponse = await cloudinary.uploader.upload(image);
         imageUrl = uploadResponse.secure_url;
@@ -81,7 +84,7 @@ const msgController = () => {
         image: imageUrl,
       });
       await newMessage.save();
-      res.status(201).json({ msg: "Message created and sent successfully", data: {message: newMessage}});
+      res.status(201).json({ msg: "Message created and sent successfully", data: { message: newMessage } });
     } catch (err) {
       console.log("Error in sendMessage controller", err);
       res.status(500).json({ msg: "Error sending message" });
