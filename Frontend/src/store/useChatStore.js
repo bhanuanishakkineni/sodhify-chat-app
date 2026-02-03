@@ -69,7 +69,7 @@ export const useChatStore = create((set, get) => ({
       createdAt: new Date().toISOString(),
       isOptimistic: true, // flag to identify optimistic messages (optional)
     };
-    // immidietaly update the ui by adding the message
+    // immediately update the ui by adding the message
     set({ messages: [...messages, optimisticMessage] }); // This will update the messages state, not the messages variable here.
     try {
         const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);

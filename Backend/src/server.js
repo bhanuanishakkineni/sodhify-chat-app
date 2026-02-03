@@ -6,8 +6,8 @@ import { connectDB } from "./startup/db.js";
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { arcjetMiddleware } from './middlewares/arcjet.middleware.js';
+import {app, server} from "./sockets/socket.js";
 
-const app = express();
 const port = process.env.PORT || 3000;
 const __dirname = path.resolve();
 
@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
     connectDB();
 });
