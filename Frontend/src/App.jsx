@@ -1,5 +1,5 @@
 // import { useState } from 'react';
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import "./App.css";
 import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/useAuthStore";
@@ -12,10 +12,22 @@ import PageLoader from "./components/PageLoader";
 
 function App() {
   const {checkAuth, isCheckingAuth, authUser} = useAuthStore();
+  const location = useLocation();
+  const routes = [
+    {pattern: /^\/login$/, title: "Sodhify login"},
+    {pattern: /^\/signup$/, title: "Sodhify signup"},
+    {pattern: /.*/, title: "Sodhify"},
+  ];
+
+  useEffect(() => {
+    const match = routes.find((route) => route.pattern.test(location.pathname));
+    document.title = match.title;
+  }, [location]);
+
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
-  console.log(authUser);
+
   if (isCheckingAuth) return <PageLoader />
   return (
     <div className="min-h-screen bg-slate-900 relative flex items-center justify-center p-4 overflow-hidden">
