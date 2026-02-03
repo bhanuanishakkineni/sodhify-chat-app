@@ -7,13 +7,17 @@ import MessageLoadingSkeleton from "./MessageLoadingSkeleton";
 import MessageInput from "./MessageInput";
 
 export function ChatContainer() {
-  const { getMessagesById, messages, isMessagesLoading, selectedUser } =
+  const { getMessagesById, messages, isMessagesLoading, selectedUser, subscribeToMessages, unSubscribeFromMessages } =
     useChatStore();
   const { authUser } = useAuthStore();
   const bottomRef = useRef(null); // ref to make the chat scroll to latest messages
   useEffect(() => {
     getMessagesById(selectedUser._id);
-  }, [selectedUser, getMessagesById]);
+    subscribeToMessages();
+
+    // clean up
+    return () => unSubscribeFromMessages();
+  }, [selectedUser, getMessagesById, subscribeToMessages, unSubscribeFromMessages]);
 
   // Render on every time messages update.
   useEffect(() => {

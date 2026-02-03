@@ -2,8 +2,7 @@ import { useState, useRef } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
 import { LogOutIcon, Volume2Icon, VolumeOffIcon } from "lucide-react";
-
-const mouseClickSound = new Audio("src/assets/sounds/mouse-click.mp3");
+import { mouseClickSound } from "../utils/sounds";
 
 export function ProfileHeader() {
   const { isSoundEnabled, toggleSound } = useChatStore();

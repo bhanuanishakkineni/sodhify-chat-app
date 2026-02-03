@@ -1,6 +1,7 @@
 import { User } from "../models/user.js";
 import { Message } from "../models/message.js";
 import cloudinary from "../utils/cloudinary.js";
+import { getReceiverSocketId, io } from "../sockets/socket.js";
 
 const msgController = () => {
   const getAllContacts = async (req, res) => {
@@ -84,6 +85,11 @@ const msgController = () => {
         image: imageUrl,
       });
       await newMessage.save();
+      // send message in in real time using web socket
+      const receiverSocketId = getReceiverSocketId(receiverId);
+      if (receiverSocketId) {
+        io.to(receiverSocketId).emit("newMessage", newMessage);
+      }
       res.status(201).json({ msg: "Message created and sent successfully", data: { message: newMessage } });
     } catch (err) {
       console.log("Error in sendMessage controller", err);
